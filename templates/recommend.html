@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>📚 Book Recommender</h1>
+            <nav>
+                <a href="{{ url_for('recommend_ui') }}">Home</a>
+                <a href="#">Top Picks</a>
+                <a href="#">Genres</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+<!-- 
+    Results Hero
+    <section class="hero small-hero">
+        <div class="hero-content">
+            <h2>Recommendations for "{{ user_query }}"</h2>
+            <p>Based on your favorite book, here are some you might love.</p>
+        </div>
+    </section> -->
+
+    <!-- Recommendation Grid -->
+    {% if data %}
+    <section class="recommendations">
+        <div class="container">
+            <h3>Our Top Picks</h3>
+            <div class="book-grid">
+                {% for book in data %}
+                    <div class="book-card">
+                        <img src="{{ book.image }}" alt="{{ book.title }} cover">
+                        <h4>{{ book.title }}</h4>
+                        <p>by {{ book.author }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <section class="recommendations">
+        <div class="container">
+            <h3>No recommendations found 😕</h3>
+            <p style="text-align:center; color:#aaa;">Try searching for another book title.</p>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Book Recommender | Built with ❤️ by Your Name</p>
+    </footer>
+</body>
+</html>

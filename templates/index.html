@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>📚 Book Recommender</h1>
+            <nav>
+                <a href="{{ url_for('recommend_ui') }}">Home</a>
+                <a href="#">Top Picks</a>
+                <a href="#">Genres</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Find Your Next Favorite Book</h2>
+            <p>Discover personalized book recommendations based on your taste and interests.</p>
+            <form class="search-box" action="/recommend_books" method="post">
+                <input type="text" name="book_name" placeholder="Enter a book title..." required>
+                <button type="submit">Recommend</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    {% if book_name %}
+    <section class="recommendations">
+        <div class="container">
+            <h3>Recommended for You Top 50 books</h3>
+            <div class="book-grid">
+                {% for i in range(book_name|length) %}
+                    <div class="book-card">
+                        <img src="{{ img[i] }}" alt="{{ book_name[i] }} Cover">
+                        <h4>{{ book_name[i] }}</h4>
+                        <p>by {{ author[i] }}</p>
+                        <div class="book-meta">
+                            <span>⭐ Rating: {{ rating[i] }}</span><br>
+                            <span>🗳️ Votes: {{ votes[i] }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Book Recommender | Built with ❤️ by Your Name</p>
+    </footer>
+</body>
+</html>
