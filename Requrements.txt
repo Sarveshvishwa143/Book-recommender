@@ -2,3 +2,6 @@ Flask
 numpy
 scikit-learn
 pandas
+
+Uncompress the file :in terminal
+ tar -xzf books.pkl.gz
